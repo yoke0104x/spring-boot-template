@@ -1,7 +1,11 @@
 package xyz.content.template.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import xyz.content.template.model.dto.SaveUserDto;
 import xyz.content.template.model.entity.User;
+import xyz.content.template.response.ResultResponse;
+
+import java.util.List;
 
 /**
 * @author yoke
@@ -15,4 +19,18 @@ public interface UserService extends IService<User> {
      * @return
      */
     String getUserNum();
+
+
+    /**
+     * 保存用户
+     * @param saveUserDto
+     * @return
+     */
+    ResultResponse<User> saveUser(SaveUserDto saveUserDto);
+
+    /**
+     * 获取用户列表
+     * @return
+     */
+    ResultResponse<List<User>> listUser();
 }

@@ -1,10 +1,12 @@
 package xyz.content.template.model.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import lombok.Data;
 import xyz.content.template.TemplateApplication;
 
@@ -15,43 +17,31 @@ import xyz.content.template.TemplateApplication;
  */
 @TableName(value ="user")
 @Data
-public class User extends TemplateApplication implements Serializable {
-    /**
-     * 用户ID，非自增
-     */
-    @TableId
-    private String id;
+@Schema(description = "用户实体类")
+public class User extends CommEntity implements Serializable {
+
 
     /**
      * 用户名，必须唯一
      */
+    @Schema(description = "用户名")
     private String username;
 
     /**
      * 用户密码
      */
+    @Schema(description = "用户密码")
     private String password;
 
     /**
      * 用户邮箱
      */
+    @Schema(description = "用户邮箱")
     private String email;
 
     /**
      * 用户手机号
      */
+    @Schema(description = "用户手机号")
     private String phone;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
 }

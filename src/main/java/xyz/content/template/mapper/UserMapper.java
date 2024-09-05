@@ -1,6 +1,7 @@
 package xyz.content.template.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import xyz.content.template.model.dto.UpdateUserDto;
 import xyz.content.template.model.entity.User;
 
 /**
@@ -10,7 +11,18 @@ import xyz.content.template.model.entity.User;
 * @Entity /xyz/content/template.User
 */
 public interface UserMapper extends BaseMapper<User> {
+    /**
+     * 获取用户数量
+     * @return
+     */
     int getUserNum();
+
+    /**
+     * 根据id更新用户信息
+     * @param updateUserDto
+     * @return
+     */
+    int updateUserById(UpdateUserDto updateUserDto);
 }
 
 

@@ -22,4 +22,15 @@
     <select id="getUserNum" resultType="java.lang.Integer">
         select count(*) from user
     </select>
+
+    <update id="updateUserById" parameterType="xyz.content.template.model.dto.UpdateUserDto">
+        update user
+        <set>
+            <if test="username != null">username = #{username},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="updateTime != null">update_time = #{updateTime}</if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

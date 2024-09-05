@@ -2,7 +2,9 @@ package xyz.content.template.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.content.template.model.dto.SaveUserDto;
+import xyz.content.template.model.dto.UpdateUserDto;
 import xyz.content.template.model.entity.User;
+import xyz.content.template.response.ResultPage;
 import xyz.content.template.response.ResultResponse;
 
 import java.util.List;
@@ -33,4 +35,19 @@ public interface UserService extends IService<User> {
      * @return
      */
     ResultResponse<List<User>> listUser();
+
+    /**
+     * 分页获取用户列表
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    ResultResponse<ResultPage<User>> listUserByPage(int pageNum, int pageSize);
+
+    /**
+     * 根据id获取用户
+     * @param updateUserDto
+     * @return
+     */
+    ResultResponse updateUserById(UpdateUserDto updateUserDto);
 }

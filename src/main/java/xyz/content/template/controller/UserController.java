@@ -6,12 +6,17 @@ import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import xyz.content.template.model.dto.PageDto;
 import xyz.content.template.model.dto.SaveUserDto;
+import xyz.content.template.model.dto.UpdateUserDto;
 import xyz.content.template.model.entity.User;
+import xyz.content.template.response.ResultPage;
 import xyz.content.template.response.ResultResponse;
 import xyz.content.template.service.UserService;
 
 import java.util.List;
+
+import static net.sf.jsqlparser.util.validation.metadata.NamedObject.user;
 
 /**
  * @program: user
@@ -44,5 +49,17 @@ public class UserController {
     @GetMapping("/list")
     public ResultResponse<List<User>> list(){
         return userService.listUser();
+    }
+
+    @Operation(summary = "分页获取用户列表")
+    @PostMapping("/list/page")
+    public ResultResponse<ResultPage<User>> listPage(@RequestBody PageDto pageDto){
+        return userService.listUserByPage(pageDto.getCurrent(), pageDto.getSize());
+    }
+
+    @Operation(summary = "根据id修改用户")
+    @PostMapping("/update")
+    public ResultResponse<User> update(@Validated @RequestBody UpdateUserDto updateUserDto){
+        return userService.updateUserById(updateUserDto);
     }
 }

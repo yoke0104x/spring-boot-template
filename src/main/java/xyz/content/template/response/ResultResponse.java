@@ -48,6 +48,7 @@ public class ResultResponse<T> implements Serializable {
         ResultResponse<T> response = new ResultResponse<>();
         response.setData(data);
         response.setCode(StatusEnum.SUCCESS.code);
+        response.setMsg(StatusEnum.SUCCESS.message);
         return response;
     }
 

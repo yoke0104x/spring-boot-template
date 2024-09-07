@@ -1,9 +1,13 @@
 package xyz.content.template.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import xyz.content.template.model.dto.LoginDto;
 import xyz.content.template.model.dto.SaveUserDto;
 import xyz.content.template.model.dto.UpdateUserDto;
 import xyz.content.template.model.entity.User;
+import xyz.content.template.model.vo.UserInfoVo;
 import xyz.content.template.response.ResultPage;
 import xyz.content.template.response.ResultResponse;
 
@@ -17,18 +21,11 @@ import java.util.List;
 public interface UserService extends IService<User> {
 
     /**
-     * 获取用户数量
-     * @return
-     */
-    String getUserNum();
-
-
-    /**
      * 保存用户
      * @param saveUserDto
      * @return
      */
-    ResultResponse<User> saveUser(SaveUserDto saveUserDto);
+    ResultResponse<User> saveUser(SaveUserDto saveUserDto, HttpServletRequest request);
 
     /**
      * 获取用户列表
@@ -50,4 +47,38 @@ public interface UserService extends IService<User> {
      * @return
      */
     ResultResponse updateUserById(UpdateUserDto updateUserDto);
+
+    /**
+     * 获取验证码
+     * @param w 验证码宽度
+     * @param h 验证码高度
+     * @param response
+     */
+    void getCaptcha(int w,int h,HttpServletResponse response);
+
+    /**
+     * 用户登录
+     * @param loginDto
+     * @return
+     */
+    ResultResponse login(LoginDto loginDto);
+
+    /**
+     * 用户登出
+     * @return
+     */
+    ResultResponse logout();
+
+    /**
+     * 获取用户信息
+     * @return
+     */
+    ResultResponse<UserInfoVo> getUserInfo();
+
+    /**
+     * 更新用户信息
+     * @param updateUserDto
+     * @return
+     */
+    ResultResponse updateUserInfo(UpdateUserDto updateUserDto);
 }

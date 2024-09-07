@@ -1,20 +1,17 @@
 package xyz.content.template.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import xyz.content.template.model.entity.CommEntity;
 
 /**
  * @program: template
  * @description: yoke
  * @author: yoke
- * @create: 2024-09-04 15:56
+ * @create: 2024-09-06 10:31
  **/
 @Data
-@Schema(description = "保存用户")
-public class SaveUserDto {
+public class LoginDto {
     /**
      * 用户名，必须唯一
      */
@@ -29,22 +26,4 @@ public class SaveUserDto {
     @NotEmpty(message = "用户密码不能为空")
     private String password;
 
-    /**
-     * 用户邮箱
-     */
-    @Schema(description = "用户邮箱")
-    private String email;
-
-    /**
-     * 用户手机号
-     */
-    @Schema(description = "用户手机号")
-    private String phone;
-
-    /**
-     * 验证码
-     */
-    @Schema(description = "验证码")
-    @NotEmpty(message = "验证码不能为空")
-    private String code;
 }

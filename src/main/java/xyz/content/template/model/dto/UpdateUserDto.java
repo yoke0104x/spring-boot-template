@@ -42,4 +42,22 @@ public class UpdateUserDto extends CommEntity {
      */
     @Schema(description = "用户手机号")
     private String phone;
+
+    /**
+     * 用户密码
+     */
+    @Schema(description = "用户密码")
+    private String password;
+
+    /**
+     * 用户姓氏
+     */
+    @Schema(description = "用户姓氏")
+    private String surname;
+
+    /**
+     * 名字
+     */
+    @Schema(description = "用户名字")
+    private String name;
 }

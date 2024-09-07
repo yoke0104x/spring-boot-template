@@ -1,25 +1,18 @@
-package xyz.content.template.model.entity;
-
-import com.baomidou.mybatisplus.annotation.*;
-
-import java.io.Serializable;
-import java.util.Date;
+package xyz.content.template.model.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import lombok.Data;
-import xyz.content.template.TemplateApplication;
+import xyz.content.template.model.entity.CommEntity;
 
 /**
- * 
- * @author yoke
- * @TableName user
- */
-@TableName(value ="user")
+ * @program: template
+ * @description: yoke
+ * @author: yoke
+ * @create: 2024-09-06 11:17
+ **/
 @Data
-@Schema(description = "用户实体类")
-public class User extends CommEntity implements Serializable {
-
+@Schema(description = "用户信息")
+public class UserInfoVo extends CommEntity {
 
     /**
      * 用户名，必须唯一
@@ -48,7 +41,7 @@ public class User extends CommEntity implements Serializable {
     /**
      * 姓氏
      */
-    @Schema(description = "用户姓氏")
+    @Schema(description = "姓氏")
     private String surname;
 
     /**

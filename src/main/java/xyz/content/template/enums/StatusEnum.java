@@ -17,6 +17,14 @@ public enum StatusEnum {
     SERVICE_ERROR(500, "服务器去旅行了，请稍后重试"),
     PARAM_INVALID(1000, "无效的参数"),
     HTTP_METHOD_NOT_SUPPORT(1001,"不支持的HTTP方法"),
+    CAPTCHA_ERROR(1002,"验证码错误"),
+    CAPTCHA_EXPIRED(1003,"验证码已过期"),
+    USER_NOT_EXIST(1004,"用户不存在"),
+    PASSWORD_ERROR(1005,"用户名或密码错误"),
+    USERNAME_EXIST(1006,"用户已存在"),
+    PHONE_ERROR(1007,"手机号错误"),
+    PHONE_EXIST(1008,"手机号已存在"),
+    DATA_NOT_EXIST(1009,"数据不存在"),
     ;
     public final Integer code;
 

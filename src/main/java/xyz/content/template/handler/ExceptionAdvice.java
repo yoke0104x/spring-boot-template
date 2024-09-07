@@ -1,5 +1,6 @@
 package xyz.content.template.handler;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.UnexpectedTypeException;
@@ -42,6 +43,28 @@ public class ExceptionAdvice {
     public ResultResponse<Void> handleServiceException(ServiceException serviceException, HttpServletRequest request) {
         log.warn("request {} throw ServiceException \n", request, serviceException);
         return ResultResponse.error(serviceException.getStatus(), serviceException.getMessage());
+    }
+
+    @ExceptionHandler(NotLoginException.class)
+    @ResponseBody
+    public ResultResponse<Void> handleNotLoginException(NotLoginException ex, HttpServletRequest request) {
+        // 不同异常返回不同状态码
+        String message = "";
+        if (ex.getType().equals(NotLoginException.NOT_TOKEN)) {
+            message = "未提供Token";
+        } else if (ex.getType().equals(NotLoginException.INVALID_TOKEN)) {
+            message = "未提供有效的Token";
+        } else if (ex.getType().equals(NotLoginException.TOKEN_TIMEOUT)) {
+            message = "登录信息已过期，请重新登录";
+        } else if (ex.getType().equals(NotLoginException.BE_REPLACED)) {
+            message = "您的账户已在另一台设备上登录，如非本人操作，请立即修改密码";
+        } else if (ex.getType().equals(NotLoginException.KICK_OUT)) {
+            message = "已被系统强制下线";
+        } else {
+            message = "当前会话未登录";
+        }
+        // 返回给前端
+        return ResultResponse.error(StatusEnum.UNAUTHORIZED, message);
     }
 
     /**

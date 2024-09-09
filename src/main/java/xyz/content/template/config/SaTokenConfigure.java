@@ -39,7 +39,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                         "/**/v3/api-docs/**",
                         "/user/captcha/**",
                         "/user/save",
-                        "/data/update"
+                        "/data/update",
+                        "/data/today"
                 );
     }
 }

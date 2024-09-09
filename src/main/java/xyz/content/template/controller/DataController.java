@@ -7,10 +7,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import xyz.content.template.model.dto.SearchDataPageDto;
 import xyz.content.template.model.dto.UpdateDataDto;
+import xyz.content.template.model.entity.DataEntry;
+import xyz.content.template.model.vo.DataDayDataVo;
 import xyz.content.template.response.ResultResponse;
 import xyz.content.template.service.DataService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,5 +60,17 @@ public class DataController {
     @DeleteMapping("/delete/{id}")
     public ResultResponse delete(@PathVariable("id") String id){
         return dataService.deleteDataIds(id);
+    }
+
+    @Operation(summary = "获取当天的数据")
+    @GetMapping("/today")
+    public ResultResponse<List<DataEntry>> getTodayData() {
+        return dataService.getSameDayDataEntry();
+    }
+
+    @Operation(summary = "获取用户今日数据")
+    @GetMapping("/today/user")
+    public ResultResponse<DataDayDataVo> getUserTodayData() {
+        return dataService.getDataDayData();
     }
 }

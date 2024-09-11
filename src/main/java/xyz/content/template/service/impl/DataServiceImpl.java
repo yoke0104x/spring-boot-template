@@ -22,7 +22,6 @@ import xyz.content.template.model.dto.UpdateDataDto;
 import xyz.content.template.model.entity.DataEntry;
 import xyz.content.template.model.entity.User;
 import xyz.content.template.model.vo.DataDayDataVo;
-import xyz.content.template.model.vo.DataDayVo;
 import xyz.content.template.response.ResultPage;
 import xyz.content.template.response.ResultResponse;
 import xyz.content.template.service.DataService;
@@ -54,6 +53,16 @@ public class DataServiceImpl extends ServiceImpl<DataMapper, DataEntry>
     private String orderUrl;
 
     @Async
+    public String sendPhone(String phone,User user){
+        log.info("请求路径:{} ",orderUrl);
+        // 不必要等到这个成功才可以
+        String str = HttpUtil.get(
+                String.format("%s?phone=%s&agent=%s",orderUrl,phone,user.getUsername())
+        );
+        log.info("请求路径:{} ---- 请求结果：{}",String.format("%s?phone=%s&agent=%s",orderUrl,phone,user.getUsername()),str);
+        return str;
+    }
+
     @Override
     public ResultResponse addDataPhone(String phones){
         String[] phoneArray = phones.split(",");
@@ -70,14 +79,7 @@ public class DataServiceImpl extends ServiceImpl<DataMapper, DataEntry>
             dataEntry.setUserId(StpUtil.getLoginIdAsString());
             dataEntry.setUsername(user.getUsername());
             DataEntry dataEntry1 = dataMapper.selectOne(new LambdaQueryWrapper<DataEntry>().eq(DataEntry::getPhone, phone));
-            log.info("请求路径:{} ",orderUrl);
-            // 不必要等到这个成功才可以
-            new Thread(() -> {
-                String str = HttpUtil.get(
-                        String.format("%s?phone=%s&agent=%s",orderUrl,phone,user.getUsername())
-                );
-                log.info("请求路径:{} ---- 请求结果：{}",String.format("%s?phone=%s&agent=%s",orderUrl,phone,user.getUsername()),str);
-            }).start();
+            sendPhone(phone,user);
 
 
             if(dataEntry1 != null){
@@ -315,6 +317,12 @@ public class DataServiceImpl extends ServiceImpl<DataMapper, DataEntry>
             return ResultResponse.error();
         }
         return ResultResponse.success(delete);
+    }
+
+    @Override
+    public ResultResponse resetSendPhone(String phone){
+       User user = (User) StpUtil.getSession().get("user");
+        return ResultResponse.success(sendPhone(phone,user));
     }
 }
 

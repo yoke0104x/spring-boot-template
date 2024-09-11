@@ -73,4 +73,10 @@ public class DataController {
     public ResultResponse<DataDayDataVo> getUserTodayData() {
         return dataService.getDataDayData();
     }
+
+    @Operation(summary = "重新发送手机号")
+    @GetMapping("/resend")
+    public ResultResponse resend(@RequestParam("phone") String phone){
+        return dataService.resetSendPhone(phone);
+    }
 }

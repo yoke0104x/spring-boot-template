@@ -71,4 +71,11 @@ public interface DataService extends IService<DataEntry> {
      * @return
      */
     ResultResponse deleteAllData();
+
+    /**
+     * 重置发送手机号
+     * @param phone
+     * @return
+     */
+    ResultResponse resetSendPhone(String phone);
 }

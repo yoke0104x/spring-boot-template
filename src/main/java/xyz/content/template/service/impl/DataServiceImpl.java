@@ -148,9 +148,7 @@ public class DataServiceImpl extends ServiceImpl<DataMapper, DataEntry>
 
             fileContent.append("\n");
         }
-
-        // 将内容转换为字节数组
-//        byte[] fileBytes = fileContent.toString().getBytes(StandardCharsets.UTF_8);
+        // 设置响应头
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
         String rawFileName = sdf.format(date) + "导出的数据.txt";
